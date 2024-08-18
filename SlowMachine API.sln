@@ -5,6 +5,8 @@ VisualStudioVersion = 17.9.34518.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SlowMachine API", "SlowMachine API\SlowMachine API.csproj", "{26574480-A893-45A9-A54B-BCEB51F1E27C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{AA31C18B-291A-4F9A-B467-F3109591CF3C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{26574480-A893-45A9-A54B-BCEB51F1E27C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26574480-A893-45A9-A54B-BCEB51F1E27C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26574480-A893-45A9-A54B-BCEB51F1E27C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA31C18B-291A-4F9A-B467-F3109591CF3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA31C18B-291A-4F9A-B467-F3109591CF3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA31C18B-291A-4F9A-B467-F3109591CF3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA31C18B-291A-4F9A-B467-F3109591CF3C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
