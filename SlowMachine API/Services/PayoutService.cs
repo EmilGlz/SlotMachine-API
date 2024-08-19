@@ -58,9 +58,7 @@ namespace SlowMachine_API.Services
             for (int row = 0; row < rows; row++)
             {
                 for (int col = 0; col < cols; col++)
-                {
                     uniqueElements.Add(matrix[row][col]);
-                }
             }
 
             return uniqueElements;
@@ -78,15 +76,11 @@ namespace SlowMachine_API.Services
                 for (int row = 0; row < rows; row++)
                 {
                     if (matrix[row][col] == element)
-                    {
                         rowList.Add(row);
-                    }
                 }
 
                 if (rowList.Count > 0)
-                {
                     positions[col] = rowList;
-                }
             }
 
             positions = FilterSequentialPositions(positions);
