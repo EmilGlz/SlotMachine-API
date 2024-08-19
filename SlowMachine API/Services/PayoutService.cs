@@ -1,14 +1,15 @@
-﻿using SlowMachine_API.Contracts;
+﻿using SlotMachine.Config;
+using SlowMachine_API.Contracts;
 using SlowMachine_API.Models;
 namespace SlowMachine_API.Services
 {
-    public class PayoutService
+    public class PayoutService : IPayoutService
     {
-        private readonly IPayTableConfig _config;
+        public IPayTableConfig Config { get; set; }
 
-        public PayoutService(IPayTableConfig paytableConfig)
+        public PayoutService()
         {
-            _config = paytableConfig;
+            Config = new PaytableConfig();
         }
 
         public void CalculateWinnings(SpinResult spinResult)
@@ -30,7 +31,7 @@ namespace SlowMachine_API.Services
                     {
                         Symbol = element,
                         MatchCount = coloumnIndexes.Count,
-                        Payout = _config.Paytable.GetPayout(element, coloumnIndexes.Count)
+                        Payout = Config.Paytable.GetPayout(element, coloumnIndexes.Count)
                     };
                     for (int k = 0; k < coloumnIndexes.Count; k++)
                     {

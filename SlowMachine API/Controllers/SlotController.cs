@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SlotMachine.Config;
-using SlowMachine_API.Config;
-using SlowMachine_API.Services;
+using SlowMachine_API.Contracts;
 
 namespace SlowMachine_API.Controllers
 {
@@ -9,20 +7,24 @@ namespace SlowMachine_API.Controllers
     [ApiController]
     public class SlotController : ControllerBase
     {
-        [HttpPost]
-        public IActionResult Post([FromBody] string value)
+        private readonly ISlotMachineService _slotMachineService;
+        private readonly IPayoutService _payoutService;
+        public SlotController(ISlotMachineService service, IPayoutService payoutService)
         {
-            var reelConfig = new ReelConfig();
-            var paytableConfig = new PaytableConfig();
+            _slotMachineService = service;
+            _payoutService = payoutService;
+        }
 
-            var slotMachineService = new SlotMachineService(reelConfig);
-            var payoutService = new PayoutService(paytableConfig);
+        [HttpPost]
+        [Route("Run")]
+        public IActionResult Run()
+        {
+            //var paytableConfig = new PaytableConfig();
+            //var slotMachineService = new SlotMachineService();
+            //var payoutService = new PayoutService(paytableConfig);
 
-            var spinResult = slotMachineService.SpinReels();
-
-            slotMachineService.DisplayScreen(spinResult);
-
-            payoutService.CalculateWinnings(spinResult);
+            var spinResult = _slotMachineService.SpinReels();
+            _payoutService.CalculateWinnings(spinResult);
 
             return Ok(spinResult);
         }

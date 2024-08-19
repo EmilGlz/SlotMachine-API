@@ -1,19 +1,20 @@
-﻿using SlowMachine_API.Contracts;
+﻿using SlowMachine_API.Config;
+using SlowMachine_API.Contracts;
 using SlowMachine_API.Models;
 namespace SlowMachine_API.Services
 {
-    public class SlotMachineService
+    public class SlotMachineService : ISlotMachineService
     {
-        private readonly IReelConfig _config;
+        public IReelConfig Config { get; set; }
 
-        public SlotMachineService(IReelConfig reelConfig)
+        public SlotMachineService()
         {
-            _config = reelConfig;
+            Config = new ReelConfig();
         }
 
         public SpinResult SpinReels()
         {
-            var stopPositions = _config.GetStopPositions();
+            var stopPositions = Config.GetStopPositions();
             var screen = GetScreen(stopPositions);
             return new SpinResult(stopPositions, screen);
         }
@@ -22,10 +23,11 @@ namespace SlowMachine_API.Services
         {
             string[][] screen = new string[3][];
             for (int i = 0; i < screen.Length; i++)
-                screen[i] = new string[5]; // Each row has 5 columns
-            for (int i = 0; i < _config.ReelBands.Count; i++)
+                screen[i] = new string[5];
+
+            for (int i = 0; i < Config.ReelBands.Count; i++)
             {
-                var visibleSymbols = _config.ReelBands[i].GetVisibleSymbols(stopPositions[i]);
+                var visibleSymbols = Config.ReelBands[i].GetVisibleSymbols(stopPositions[i]);
                 for (int j = 0; j < 3; j++)
                     screen[j][i] = visibleSymbols[j];
             }
