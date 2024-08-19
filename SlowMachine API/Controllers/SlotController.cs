@@ -19,10 +19,6 @@ namespace SlowMachine_API.Controllers
         [Route("Run")]
         public IActionResult Run()
         {
-            //var paytableConfig = new PaytableConfig();
-            //var slotMachineService = new SlotMachineService();
-            //var payoutService = new PayoutService(paytableConfig);
-
             var spinResult = _slotMachineService.SpinReels();
             _payoutService.CalculateWinnings(spinResult);
 

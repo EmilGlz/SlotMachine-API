@@ -11,13 +11,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<ISlotMachineService, SlotMachineService>();
 builder.Services.AddScoped<IPayoutService, PayoutService>();
+
+// Configure CORS policy
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll", builder =>
+    options.AddPolicy("AllowOrigin", builder =>
     {
-        builder.AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader();
+        builder
+            .AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader();
     });
 });
 
@@ -28,14 +31,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors(builder =>
-    {
-        builder
-        .AllowAnyOrigin()
-        .AllowAnyMethod()
-        .AllowAnyHeader();
-    });
 }
+
+// Apply the CORS policy before other middleware
+app.UseCors("AllowOrigin");
 
 app.UseHttpsRedirection();
 
