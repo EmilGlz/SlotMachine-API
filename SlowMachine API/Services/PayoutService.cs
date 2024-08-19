@@ -128,7 +128,6 @@ namespace SlowMachine_API.Services
 
             void GenerateCombinations(int depth, List<int> currentCombination, List<int> currentKeys)
             {
-                // Base case: if we've considered all lists
                 if (depth == lists.Count)
                 {
                     combinations.Add(new List<int>(currentCombination));
@@ -136,14 +135,13 @@ namespace SlowMachine_API.Services
                     return;
                 }
 
-                // Recursive case: iterate over each element in the current list
                 foreach (var item in lists[depth])
                 {
                     currentCombination.Add(item);
-                    currentKeys.Add(keyLists[depth][0]); // Use the key corresponding to the current list
+                    currentKeys.Add(keyLists[depth][0]); 
                     GenerateCombinations(depth + 1, currentCombination, currentKeys);
-                    currentCombination.RemoveAt(currentCombination.Count - 1); // Backtrack
-                    currentKeys.RemoveAt(currentKeys.Count - 1); // Backtrack
+                    currentCombination.RemoveAt(currentCombination.Count - 1);
+                    currentKeys.RemoveAt(currentKeys.Count - 1);
                 }
             }
 
